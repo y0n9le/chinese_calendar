@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- 方圆日历外轮廓剪裁 -->
+    <clipPath id="calCard">
+      <rect x="4" y="4" width="56" height="56" rx="10" />
+    </clipPath>
+  </defs>
+
+  <!-- 日历形态底座 (用方圆，无任何文字) -->
+  <g clip-path="url(#calCard)">
+    <!-- 上黄：日历顶部挂牌/翻历头部 -->
+    <rect x="4" y="4" width="56" height="18" fill="#F59E0B" />
+    
+    <!-- 分隔细金线 -->
+    <line x1="4" y1="22" x2="60" y2="22" stroke="#D97706" stroke-width="1.5" />
+
+    <!-- 下红：日历主体红色底色 -->
+    <rect x="4" y="22" width="56" height="38" fill="#B91C1C" />
+
+    <!-- 太极图：置于下红位置，纯黑白两色 -->
+    <g transform="translate(32, 41)">
+      <!-- 太极外底白半圆/底盘 -->
+      <circle cx="0" cy="0" r="13" fill="#FFFFFF" />
+      
+      <!-- 太极黑鱼 (S形流线) -->
+      <path d="M 0,-13 A 13,13 0 0,1 0,13 A 6.5,6.5 0 0,1 0,0 A 6.5,6.5 0 0,0 0,-13 Z" fill="#18181B" />
+      
+      <!-- 阴阳鱼眼 (黑中有白，白中有黑) -->
+      <!-- 黑鱼头部内的白鱼眼 -->
+      <circle cx="0" cy="-6.5" r="2.2" fill="#FFFFFF" />
+      <!-- 白鱼头部内的黑鱼眼 -->
+      <circle cx="0" cy="6.5" r="2.2" fill="#18181B" />
+      
+      <!-- 太极外圈细致微光圈，与红底相映生辉 -->
+      <circle cx="0" cy="0" r="13" fill="none" stroke="#FFFFFF" stroke-width="0.8" stroke-opacity="0.6" />
+    </g>
+  </g>
+
+  <!-- 顶部日历装订小挂孔 (增强日历辨识度) -->
+  <rect x="16" y="2" width="5" height="5" rx="2.5" fill="#B45309" />
+  <rect x="43" y="2" width="5" height="5" rx="2.5" fill="#B45309" />
+
+  <!-- 方圆日历外轮廓金边 -->
+  <rect x="4" y="4" width="56" height="56" rx="10" fill="none" stroke="#D97706" stroke-width="2" />
+</svg>

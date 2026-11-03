@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 严格杜绝任何设备屏幕横向溢出 */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+}
+
+:root {
+  --font-serif: "Noto Serif SC", "Songti SC", "SimSun", "STSong", "KaiTi", serif;
+}
+
+body {
+  font-family: var(--font-serif);
+  background-color: #F8F5EE;
+  color: #24211D;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.dark body {
+  background-color: #141210;
+  color: #E8E3D9;
+}
+
+/* 宣纸底纹微质感 */
+.bg-rice-paper {
+  background-color: #F9F6F0;
+  background-image: radial-gradient(rgba(180, 83, 9, 0.03) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+.dark .bg-rice-paper {
+  background-color: #161412;
+  background-image: radial-gradient(rgba(232, 227, 217, 0.03) 1px, transparent 0);
+}
+
+/* 隐藏横向滚动条 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 细致滚动条 */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(155, 27, 27, 0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(155, 27, 27, 0.5);
+}
+
+/* 选定日期的红色高亮边框：使用 inset 内部边框，彻底杜绝左右侧红线被裁切截断的问题 */
+.cal-day-cell {
+  position: relative;
+  box-sizing: border-box;
+}
+.cal-day-cell.is-selected {
+  box-shadow: inset 0 0 0 2px #9B1B1B !important;
+  z-index: 20 !important;
+}
+.dark .cal-day-cell.is-selected {
+  box-shadow: inset 0 0 0 2px #E25353 !important;
+  z-index: 20 !important;
+}

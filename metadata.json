@@ -1,0 +1,6 @@
+{
+  "name": "中华传统历法·华夏万年历",
+  "description": "纯离线中华传统历法与天体算历系统，支持百年/千年公历与农历精准互转、二十四节气与七十二候、传统节日大典、干支四柱八字、每日黄历宜忌与日月运行天体原理模拟，完全无需网络与外部API。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

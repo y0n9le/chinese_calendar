@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>中华传统历法 · 华夏万年历与天体算历系统</title>
+    <meta name="description" content="纯HTML、CSS与原生JavaScript实现的中华传统历法与天体算历系统，无任何后端与数据库，零外部API，完全离线支持跨世纪公农互转、节气物候、每日黄历与日月运行天体原理模拟。" />
+    <meta property="og:title" content="中华传统历法 · 华夏万年历与天体算历系统" />
+    <meta property="og:description" content="纯HTML、CSS与原生JavaScript实现的中华传统历法与天体算历系统，无任何后端与数据库，零外部API，完全离线支持跨世纪公农互转、节气物候、每日黄历与日月运行天体原理模拟。" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/index.css" />
+  </head>
+  <body class="bg-[#F8F5EE] dark:bg-[#141210] text-[#24211D] dark:text-[#E8E3D9] min-h-screen antialiased selection:bg-[#9B1B1B]/20 selection:text-[#9B1B1B] w-full max-w-full overflow-x-hidden">
+    <!-- 顶部导航栏 -->
+    <header class="sticky top-0 z-40 bg-[#F9F6F0]/95 dark:bg-[#161412]/95 backdrop-blur-md border-b border-[#E2DDD2] dark:border-[#2C2824] transition-colors w-full">
+      <div class="max-w-6xl mx-auto px-3 sm:px-6">
+        <div class="flex items-center justify-between h-14 sm:h-16 gap-2 sm:gap-4">
+          <!-- 标志区 (已去除图标，纯文字展现) -->
+          <div class="flex flex-col shrink-0">
+            <span class="text-base sm:text-lg font-bold tracking-tight text-[#24211D] dark:text-[#E8E3D9] whitespace-nowrap">
+              华夏万年历
+            </span>
+            <span class="text-[9px] text-[#8C8275] dark:text-[#9E9589] tracking-widest hidden sm:inline">
+              纯离线天文历算系统
+            </span>
+          </div>
+
+          <!-- 桌面端导航项 -->
+          <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+            <button class="nav-tab-btn py-1 transition-colors cursor-pointer text-[#9B1B1B] dark:text-[#E05353] font-bold" data-tab="calendar">历法日历</button>
+            <button class="nav-tab-btn py-1 transition-colors cursor-pointer text-[#655E53] dark:text-[#A89F91]" data-tab="almanac">今日黄历</button>
+            <button class="nav-tab-btn py-1 transition-colors cursor-pointer text-[#655E53] dark:text-[#A89F91]" data-tab="converter">公农互转</button>
+            <button class="nav-tab-btn py-1 transition-colors cursor-pointer text-[#655E53] dark:text-[#A89F91]" data-tab="solarterms">节气物候</button>
+            <button class="nav-tab-btn py-1 transition-colors cursor-pointer text-[#655E53] dark:text-[#A89F91]" data-tab="science">历法科学</button>
+          </nav>
+
+          <!-- 右侧操作区 -->
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <button id="today-btn" title="跳转至今日" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-[#24211D] dark:text-[#E8E3D9] bg-[#EAE4D7] dark:bg-[#25221E] hover:bg-[#DDD6C7] dark:hover:bg-[#322E29] border border-[#D5CDBC] dark:border-[#38322B] rounded-md transition-colors cursor-pointer shadow-2xs">
+              <svg class="w-3.5 h-3.5 text-[#9B1B1B] dark:text-[#E05353]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+              <span>今日</span>
+            </button>
+
+            <button id="theme-toggle-btn" title="切换明暗纸色 (支持跟随系统与手动切换)" class="p-1.5 text-[#655E53] dark:text-[#A89F91] hover:bg-[#EAE4D7] dark:hover:bg-[#25221E] rounded-md transition-colors cursor-pointer" aria-label="切换主题">
+            </button>
+          </div>
+        </div>
+
+        <!-- 移动端紧凑导航栏 -->
+        <div class="md:hidden flex items-center justify-between border-t border-[#EAE4D7] dark:border-[#26221E] py-1.5 text-center text-xs">
+          <button class="nav-tab-btn flex-1 py-1 text-[#9B1B1B] dark:text-[#E05353] font-bold" data-tab="calendar">日历</button>
+          <button class="nav-tab-btn flex-1 py-1 text-[#655E53] dark:text-[#A89F91]" data-tab="almanac">黄历</button>
+          <button class="nav-tab-btn flex-1 py-1 text-[#655E53] dark:text-[#A89F91]" data-tab="converter">互转</button>
+          <button class="nav-tab-btn flex-1 py-1 text-[#655E53] dark:text-[#A89F91]" data-tab="solarterms">节气</button>
+          <button class="nav-tab-btn flex-1 py-1 text-[#655E53] dark:text-[#A89F91]" data-tab="science">科学</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主体容器 -->
+    <main class="w-full max-w-6xl mx-auto px-2 sm:px-4 md:px-6 py-4 sm:py-6 overflow-hidden">
+      <!-- 视图1: 历法日历 -->
+      <section id="view-calendar" class="tab-content w-full"></section>
+
+      <!-- 视图2: 今日黄历 -->
+      <section id="view-almanac" class="tab-content hidden w-full"></section>
+
+      <!-- 视图3: 公农互转与节日 -->
+      <section id="view-converter" class="tab-content hidden w-full"></section>
+
+      <!-- 视图4: 节气物候 -->
+      <section id="view-solarterms" class="tab-content hidden w-full"></section>
+
+      <!-- 视图5: 历法科学 -->
+      <section id="view-science" class="tab-content hidden w-full"></section>
+    </main>
+
+    <!-- 页脚：纯净简洁版权声明，年份自动更新 -->
+    <footer class="border-t border-[#E2DDD2] dark:border-[#2C2824] bg-[#FAF7F0] dark:bg-[#161412] py-4 transition-colors w-full">
+      <div class="max-w-6xl mx-auto px-3 sm:px-6 text-center text-xs text-[#807668] dark:text-[#9A9082]">
+        © <span id="copyright-year">2026</span> Yongle.
+      </div>
+    </footer>
+
+    <!-- 挂载原生 JavaScript 控制引擎 -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
